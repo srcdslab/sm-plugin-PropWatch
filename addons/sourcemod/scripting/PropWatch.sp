@@ -1,7 +1,7 @@
 #include <sourcemod>
 #include <sdktools>
 #include <sdkhooks>
-#include <morecolors>
+#include <multicolors>
 #include <zr_lasermines>
 
 #pragma tabsize 0
