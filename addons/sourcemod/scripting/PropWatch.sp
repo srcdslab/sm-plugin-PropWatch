@@ -63,7 +63,7 @@ public void OnPluginStart()
 	g_cvKick = CreateConVar("sm_propwatch_kick", "1", "Kick players who have been slayed for shooting props enough many times [1 = yes 0 = no]");
 	g_cvKickLimit = CreateConVar("sm_propwatch_kicklimit", "2", "Amount of slays before kicking the player");
 	g_cvAdminOnline = CreateConVar("sm_propwatch_admin", "1", "Enable or disable plugin while there are admins online [1 = enable 0 = disable]");
-	g_cvMaxPropDistance = CreateConVar("sm_propwatch_maxdist", "200", "Exclude props that are farther than this from the owner");
+	g_cvMaxPropDistance = CreateConVar("sm_propwatch_maxdist", "200", "Exclude props that are farther than this from the owner [-1 = Disable]");
 	g_cvMinPropDistance = CreateConVar("sm_propwatch_mindist_scale", "0.65", "Multiplier to scale the player model to check if a player is stuck in a prop [1 = fully stuck 0.5 = half stuck]");
 	g_cvResetPropDamage = CreateConVar("sm_propwatch_resetdmg", "1", "Reset dealt prop damage after a certain period of time if a player has not shot friendly props [1 = yes 0 = no]");
 	g_cvResetPropDamageTime = CreateConVar("sm_propwatch_resetdmg_time", "60", "Amount of seconds before resetting dealt prop damage");
@@ -208,7 +208,7 @@ public Action OnTakeDamage(int entity, int& attacker, int& inflictor, float& dam
 			GetEntPropVector(g_iOwner, Prop_Data, "m_vecOrigin", fOwnerOrigin);
 			GetEntPropVector(entity, Prop_Data, "m_vecOrigin", fVictimOrigin);
 			
-			if(GetVectorDistance(fOwnerOrigin, fVictimOrigin) <= g_cvMaxPropDistance.IntValue && !IsAttackerStuckInProp(attacker) && !IsZombieInAttackersAim(attacker))
+			if(((g_cvMaxPropDistance.IntValue > -1 && GetVectorDistance(fOwnerOrigin, fVictimOrigin) <= g_cvMaxPropDistance.IntValue) || g_cvMaxPropDistance.IntValue <= -1) && !IsAttackerStuckInProp(attacker) && !IsZombieInAttackersAim(attacker))
 			{	
 				g_iPropDamage[attacker] += RoundToZero(damage);
 				
@@ -230,7 +230,6 @@ public Action OnTakeDamage(int entity, int& attacker, int& inflictor, float& dam
 					{
 						ShowSyncHudText(attacker, g_hHudMsg, "%t", "HudTextKick", g_iPropDamage[attacker], g_cvMaxPropDamage.IntValue, g_iTimesSlayed[attacker], g_cvKickLimit.IntValue);
 					}
-					
 					else
 					{
 						ShowSyncHudText(attacker, g_hHudMsg, "%t", "HudText", g_iPropDamage[attacker], g_cvMaxPropDamage.IntValue);
