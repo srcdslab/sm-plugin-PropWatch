@@ -1,59 +1,17 @@
 "Phrases"
 {
-	"PropDistance"
-	{
-		"#format" "{1:f}"
-		"en" "{green}[PropWatch] {white}Distance: {1} units."
-	}
-	"ClientDistance"
-	{
-		"#format" "{1:f}"
-		"en" "{green}[PropWatch] {white}Distance: {1} units."
-	}
-	"UnblockedNades"
-	{
-		"en" "{green}[PropWatch] {white}Unblocked nades."
-	}
-	"GrenadeBlastDisabledAll"
-	{
-		"en" "{green}[PropWatch] {white}Too much prop nading. Disabled during this round."
-	}
 	"HudText"
 	{
 		"#format" "{1:d},{2:d}"
-		"en" "************************\nFriendly prop damage \nLimit: {1}/{2}\n************************"
+		"en" "\nFriendly prop damage \nLimit: {1}/{2} HP"
 	}
-	"HudTextKick"
+	"ChatTextClient"
 	{
-		"#format" "{1:d},{2:d},{3:d},{4:d}"
-		"en" "************************\nFriendly prop damage \nLimit: {1}/{2}\nSlayed: {3}/{4}\n************************"
+		"en" "{green}[PropWatch] {white}You were teleported and infected for excessive friendly prop damage."
 	}
-	"SlayTextClient"
-	{
-		"en" "{green}[PropWatch] {white}You were slayed for shooting props of your teammates."
-	}
-	"SlayTextAll"
+	"ChatTextAll"
 	{
 		"#format" "{1:N},{2:s}"
-		"en" "{green}[PropWatch] {white}{1} ({2}) was slayed for shooting props."
-	}
-	"KickTextClient"
-	{
-		"en" "You were kicked for repeatedly shooting props of your teammates"
-	}
-	"KickTextAll"
-	{
-		"#format" "{1:N},{2:s}"
-		"en" "{green}[PropWatch] {white}{1} ({2}) was kicked for repeatedly shooting props."
-	}
-	"LogSlay"
-	{
-		"#format" "{1:N},{2:s},{3:s}"
-		"en" "[PropWatch] {1} ({2}) was slayed for shooting props in {3}."
-	}
-	"LogKick"
-	{
-		"#format" "{1:N},{2:s},{3:s}"
-		"en" "[PropWatch] {1} ({2}) was kicked for shooting props in {3}."
+		"en" "{green}[PropWatch] {white}{1} ({2}) was teleported and infected for excessive friendly prop damage."
 	}
 }
