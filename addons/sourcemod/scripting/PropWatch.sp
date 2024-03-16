@@ -42,7 +42,7 @@ public Plugin myinfo =
 	name = "PropWatch",
 	author = "ire.",
 	description = "Automatically teleport and infect players who shoot props of their teammates",
-	version = "1.7.0"
+	version = "1.7.1"
 };
 
 public void OnPluginStart()
@@ -112,8 +112,6 @@ public void OnMapStart()
 
 public void OnMapEnd()
 {
-	// .Clear() is creating a memory leak
-	// g_arPropPaths.Clear();
 	delete g_arPropPaths;
 	g_arPropPaths = new ArrayList(128);
 }
@@ -313,9 +311,7 @@ public void Event_PlayerSpawn(Event event, const char[] name, bool dontBroadcast
 
 stock void SaveSpawnPoint(int client)
 {
-	int iTeam = GetClientTeam(client);
-
-	if(IsValidClient(client) && (iTeam == CS_TEAM_T || iTeam == CS_TEAM_CT))
+	if(IsValidClient(client) && (GetClientTeam(client) == CS_TEAM_T || GetClientTeam(client) == CS_TEAM_CT))
 		GetEntPropVector(client, Prop_Send, "m_vecOrigin", fPosition[client]);
 }
 
@@ -377,13 +373,15 @@ stock bool TraceFilter(int entity, int contentsMask)
 {
 	// Ignore clients
 	if (entity > MaxClients)
+	{
+		#if defined _zrlasermines_included // Ignore lasermines if used
+		if (g_bPluginLaserMines && g_bNative_IsEntityLasermine && !ZR_IsEntityLasermine(entity))
+		{
+			return true;
+		}
+		#endif
 		return true;
-
-	// Ignore lasermines
-#if defined _zrlasermines_included
-	if (g_bPluginLaserMines && g_bNative_IsEntityLasermine && !ZR_IsEntityLasermine(entity))
-		return true;
-#endif
+	}
 
 	return false;
 }
