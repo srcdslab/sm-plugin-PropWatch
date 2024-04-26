@@ -15,7 +15,8 @@ ConVar g_cvMaxPropDistance, g_cvMinPropDistance;
 ConVar g_cvResetPropDamage, g_cvResetPropDamageTime;
 ConVar g_cvHudLocation, g_cvHudColors, g_cvHUDChannel;
 
-Handle g_hHudMsg = INVALID_HANDLE;
+Handle g_hHudMsg = INVALID_HANDLE
+	, g_hOnClientPunished = INVALID_HANDLE;
 
 int g_iPropDamage[MAXPLAYERS+1]
 	, g_iLastPropShotTime[MAXPLAYERS+1]
@@ -44,6 +45,14 @@ public Plugin myinfo =
 	description = "Automatically teleport and infect players who shoot props of their teammates",
 	version = "1.7.1"
 };
+
+public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
+{
+	RegPluginLibrary("PropWatch");
+	g_hOnClientPunished = CreateGlobalForward("PropWatch_OnClientPunished", ET_Ignore, Param_Cell, Param_String, Param_String);
+
+	return APLRes_Success;
+}
 
 public void OnPluginStart()
 {
@@ -272,8 +281,15 @@ stock void InfectClient(int userid)
 			FormatEx(SteamID, sizeof(SteamID), "Unknown");
 		LogToFile(g_sLogFile, "[PropWatch] %N (%s) was punished for shooting props in %s.", client, SteamID, g_sMapName);
 
-		// Todo in the future: API Forward + Increase client counter punishement history
 		ZR_InfectClient(client);
+
+		// Fire forward
+		Call_StartForward(g_hOnClientPunished);
+		Call_PushCell(client);
+		Call_PushString(SteamID);
+		Call_PushString(g_sMapName);
+		Call_Finish();
+
 		CPrintToChat(client, "%t", "ChatTextClient");
 		CPrintToChatAll("%t", "ChatTextAll", client, SteamID);
 	}
@@ -311,7 +327,11 @@ public void Event_PlayerSpawn(Event event, const char[] name, bool dontBroadcast
 
 stock void SaveSpawnPoint(int client)
 {
-	if(IsValidClient(client) && (GetClientTeam(client) == CS_TEAM_T || GetClientTeam(client) == CS_TEAM_CT))
+	if (!IsValidClient(client))
+		return;
+
+	int iTeam = GetClientTeam(client);
+	if (iTeam == CS_TEAM_T || iTeam == CS_TEAM_CT)
 		GetEntPropVector(client, Prop_Send, "m_vecOrigin", fPosition[client]);
 }
 
