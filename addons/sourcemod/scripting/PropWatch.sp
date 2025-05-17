@@ -43,7 +43,7 @@ public Plugin myinfo =
 	name = "PropWatch",
 	author = "ire.",
 	description = "Automatically teleport and infect players who shoot props of their teammates",
-	version = "1.7.1"
+	version = "1.7.3"
 };
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
@@ -66,7 +66,7 @@ public void OnPluginStart()
 	g_cvResetPropDamageTime = CreateConVar("sm_propwatch_resetdmg_time", "60", "The amount of seconds before resetting dealt prop damage");
 	g_cvHudLocation = CreateConVar("sm_propwatch_hudlocation", "0.8 0.5", "X and Y coordinates of the HUD text");
 	g_cvHudColors = CreateConVar("sm_propwatch_hudcolors", "255 0 0", "RGB color values of the HUD text");
-	g_cvHUDChannel = CreateConVar("sm_propwatch_hud_channel", "4", "The channel for the hud if using DynamicChannels", _, true, 0.0, true, 6.0);
+	g_cvHUDChannel = CreateConVar("sm_propwatch_hud_channel", "4", "The channel for the hud if using DynamicChannels", _, true, 0.0, true, 5.0);
 
 	HookConVarChange(g_cvHudLocation, OnConVarChanged);
 	HookConVarChange(g_cvHudColors, OnConVarChanged);
@@ -96,7 +96,7 @@ public void OnLibraryAdded(const char[] name)
 {
 	if (strcmp(name, "zr_lasermines", false) == 0)
 		g_bPluginLaserMines = true;
-	if (strcmp(name, "DynamicChannels", false) == 0)
+	else if (strcmp(name, "DynamicChannels", false) == 0)
 		g_bPluginDynamicChannels = true;
 
 	CheckAllNatives();
@@ -106,7 +106,7 @@ public void OnLibraryRemoved(const char[] name)
 {
 	if (strcmp(name, "zr_lasermines", false) == 0)
 		g_bPluginLaserMines = false;
-	if (strcmp(name, "DynamicChannels", false) == 0)
+	else if (strcmp(name, "DynamicChannels", false) == 0)
 		g_bPluginDynamicChannels = false;
 
 	CheckAllNatives();
@@ -227,7 +227,7 @@ public Action OnTakeDamage(int entity, int& attacker, int& inflictor, float& dam
 		int iHUDChannel = -1;
 		int iChannel = g_cvHUDChannel.IntValue;
 
-		if (iChannel < 0 || iChannel > 6)
+		if (iChannel < 0 || iChannel > 5)
 			iChannel = 4;
 
 	#if defined _DynamicChannels_included_
@@ -277,9 +277,9 @@ stock void InfectClient(int userid)
 	if(g_bZMSpawned && IsPlayerAlive(client) && GetClientTeam(client) == CS_TEAM_CT)
 	{
 		char SteamID[32];
-		if (!GetClientAuthId(client, AuthId_Steam2, SteamID, sizeof(SteamID), false))
+		if (!GetClientAuthId(client, AuthId_Steam3, SteamID, sizeof(SteamID), false))
 			FormatEx(SteamID, sizeof(SteamID), "Unknown");
-		LogToFile(g_sLogFile, "[PropWatch] %N (%s) was punished for shooting props in %s.", client, SteamID, g_sMapName);
+		LogToFile(g_sLogFile, "[PropWatch] %N %s was punished for shooting props in %s.", client, SteamID, g_sMapName);
 
 		ZR_InfectClient(client);
 
