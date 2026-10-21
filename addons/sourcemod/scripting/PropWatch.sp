@@ -5,6 +5,8 @@
 #include <multicolors>
 #include <zombiereloaded>
 
+#pragma newdecls required
+
 #undef REQUIRE_PLUGIN
 #tryinclude <zr_lasermines>
 #tryinclude <DynamicChannels>
