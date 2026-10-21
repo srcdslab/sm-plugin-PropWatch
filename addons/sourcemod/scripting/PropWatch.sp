@@ -5,6 +5,8 @@
 #include <multicolors>
 #include <zombiereloaded>
 
+#pragma newdecls required
+
 #undef REQUIRE_PLUGIN
 #tryinclude <zr_lasermines>
 #tryinclude <DynamicChannels>
@@ -15,8 +17,8 @@ ConVar g_cvMaxPropDistance, g_cvMinPropDistance;
 ConVar g_cvResetPropDamage, g_cvResetPropDamageTime;
 ConVar g_cvHudLocation, g_cvHudColors, g_cvHUDChannel;
 
-Handle g_hHudMsg = INVALID_HANDLE
-	, g_hOnClientPunished = INVALID_HANDLE;
+Handle g_hHudMsg = null
+	, g_hOnClientPunished = null;
 
 int g_iPropDamage[MAXPLAYERS+1]
 	, g_iLastPropShotTime[MAXPLAYERS+1]
@@ -43,13 +45,13 @@ public Plugin myinfo =
 	name = "PropWatch",
 	author = "ire.",
 	description = "Automatically teleport and infect players who shoot props of their teammates",
-	version = "1.7.4"
+	version = "1.7.5"
 };
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
 {
 	RegPluginLibrary("PropWatch");
-	g_hOnClientPunished = CreateGlobalForward("PropWatch_OnClientPunished", ET_Ignore, Param_Cell, Param_String, Param_String);
+	g_hOnClientPunished = new GlobalForward("PropWatch_OnClientPunished", ET_Ignore, Param_Cell, Param_String, Param_String);
 
 	return APLRes_Success;
 }
@@ -68,8 +70,8 @@ public void OnPluginStart()
 	g_cvHudColors = CreateConVar("sm_propwatch_hudcolors", "255 0 0", "RGB color values of the HUD text");
 	g_cvHUDChannel = CreateConVar("sm_propwatch_hud_channel", "4", "The channel for the hud if using DynamicChannels", _, true, 0.0, true, 5.0);
 
-	HookConVarChange(g_cvHudLocation, OnConVarChanged);
-	HookConVarChange(g_cvHudColors, OnConVarChanged);
+	g_cvHudLocation.AddChangeHook(OnConVarChanged);
+	g_cvHudColors.AddChangeHook(OnConVarChanged);
 
 	AutoExecConfig();
 
@@ -140,7 +142,7 @@ void SetupProps()
 
 	File file = OpenFile(FilePath, "r");
 	char Line[128];
-	while(!IsEndOfFile(file) && ReadFileLine(file, Line, sizeof(Line)))
+	while(!file.EndOfFile() && file.ReadLine(Line, sizeof(Line)))
 	{
 		TrimString(Line);
 		g_arPropPaths.PushString(Line);
