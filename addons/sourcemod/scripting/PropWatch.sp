@@ -45,7 +45,7 @@ public Plugin myinfo =
 	name = "PropWatch",
 	author = "ire.",
 	description = "Automatically teleport and infect players who shoot props of their teammates",
-	version = "1.7.5"
+	version = "1.7.6"
 };
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
@@ -224,7 +224,7 @@ public Action OnTakeDamage(int entity, int& attacker, int& inflictor, float& dam
 	if(g_iPropDamage[attacker] <= g_cvMaxPropDamage.IntValue)
 	{
 		char sMessage[256];
-		FormatEx(sMessage, sizeof(sMessage), "%t", "HudText", g_iPropDamage[attacker], g_cvMaxPropDamage.IntValue);
+		FormatEx(sMessage, sizeof(sMessage), "%T", "HudText", attacker, g_iPropDamage[attacker], g_cvMaxPropDamage.IntValue);
 
 		int iHUDChannel = -1;
 		int iChannel = g_cvHUDChannel.IntValue;

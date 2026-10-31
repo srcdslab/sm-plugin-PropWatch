@@ -1,0 +1,15 @@
+"Phrases"
+{
+	"HudText"
+	{
+		"de" "\nSchaden an Team-Props \nLimit: {1}/{2} HP"
+	}
+	"ChatTextClient"
+	{
+		"de" "{green}[PropWatch] {white}Du wurdest wegen zu viel Schaden an Team-Props teleportiert und infiziert."
+	}
+	"ChatTextAll"
+	{
+		"de" "{green}[PropWatch] {white}{1} ({2}) wurde wegen zu viel Schaden an Team-Props teleportiert und infiziert."
+	}
+}

@@ -1,0 +1,15 @@
+"Phrases"
+{
+	"HudText"
+	{
+		"pt" "\nDano a props aliados \nLimite: {1}/{2} HP"
+	}
+	"ChatTextClient"
+	{
+		"pt" "{green}[PropWatch] {white}Você foi teleportado e infectado por causar dano excessivo a props aliados."
+	}
+	"ChatTextAll"
+	{
+		"pt" "{green}[PropWatch] {white}{1} ({2}) foi teleportado e infectado por causar dano excessivo a props aliados."
+	}
+}
