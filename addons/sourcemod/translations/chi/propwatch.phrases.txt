@@ -1,0 +1,15 @@
+"Phrases"
+{
+	"HudText"
+	{
+		"chi" "\n友方道具伤害 \n上限：{1}/{2} HP"
+	}
+	"ChatTextClient"
+	{
+		"chi" "{green}[PropWatch] {white}你因对友方道具造成过多伤害，已被传送并感染。"
+	}
+	"ChatTextAll"
+	{
+		"chi" "{green}[PropWatch] {white}{1} ({2}) 因对友方道具造成过多伤害，已被传送并感染。"
+	}
+}
