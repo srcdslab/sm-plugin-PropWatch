@@ -45,7 +45,7 @@ public Plugin myinfo =
 	name = "PropWatch",
 	author = "ire.",
 	description = "Automatically teleport and infect players who shoot props of their teammates",
-	version = "1.7.6"
+	version = "1.7.7"
 };
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
