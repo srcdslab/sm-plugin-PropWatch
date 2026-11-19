@@ -1,0 +1,15 @@
+"Phrases"
+{
+	"HudText"
+	{
+		"tr" "\nDost nesne hasarı \nSınır: {1}/{2} HP"
+	}
+	"ChatTextClient"
+	{
+		"tr" "{green}[PropWatch] {white}Dost nesnelere aşırı hasar verdiğin için ışınlandın ve enfekte edildin."
+	}
+	"ChatTextAll"
+	{
+		"tr" "{green}[PropWatch] {white}{1} ({2}) dost nesnelere aşırı hasar verdiği için ışınlandı ve enfekte edildi."
+	}
+}

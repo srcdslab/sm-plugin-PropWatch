@@ -1,0 +1,15 @@
+"Phrases"
+{
+	"HudText"
+	{
+		"cze" "\nPoškození spojeneckých objektů \nLimit: {1}/{2} HP"
+	}
+	"ChatTextClient"
+	{
+		"cze" "{green}[PropWatch] {white}Byl jsi teleportován a infikován za nadměrné poškozování spojeneckých objektů."
+	}
+	"ChatTextAll"
+	{
+		"cze" "{green}[PropWatch] {white}{1} ({2}) byl teleportován a infikován za nadměrné poškozování spojeneckých objektů."
+	}
+}
