@@ -1,0 +1,15 @@
+"Phrases"
+{
+	"HudText"
+	{
+		"pl" "\nObrażenia przyjaznych obiektów \nLimit: {1}/{2} HP"
+	}
+	"ChatTextClient"
+	{
+		"pl" "{green}[PropWatch] {white}Zostałeś teleportowany i zarażony za nadmierne niszczenie przyjaznych obiektów."
+	}
+	"ChatTextAll"
+	{
+		"pl" "{green}[PropWatch] {white}{1} ({2}) został teleportowany i zarażony za nadmierne niszczenie przyjaznych obiektów."
+	}
+}

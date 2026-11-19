@@ -1,0 +1,15 @@
+"Phrases"
+{
+	"HudText"
+	{
+		"zho" "\n友方物件傷害 \n上限：{1}/{2} HP"
+	}
+	"ChatTextClient"
+	{
+		"zho" "{green}[PropWatch] {white}你因對友方物件造成過多傷害而被傳送並感染。"
+	}
+	"ChatTextAll"
+	{
+		"zho" "{green}[PropWatch] {white}{1} ({2}) 因對友方物件造成過多傷害而被傳送並感染。"
+	}
+}

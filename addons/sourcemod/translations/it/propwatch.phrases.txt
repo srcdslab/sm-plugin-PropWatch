@@ -1,0 +1,15 @@
+"Phrases"
+{
+	"HudText"
+	{
+		"it" "\nDanni agli oggetti alleati \nLimite: {1}/{2} HP"
+	}
+	"ChatTextClient"
+	{
+		"it" "{green}[PropWatch] {white}Sei stato teletrasportato e infettato per danni eccessivi agli oggetti alleati."
+	}
+	"ChatTextAll"
+	{
+		"it" "{green}[PropWatch] {white}{1} ({2}) è stato teletrasportato e infettato per danni eccessivi agli oggetti alleati."
+	}
+}
